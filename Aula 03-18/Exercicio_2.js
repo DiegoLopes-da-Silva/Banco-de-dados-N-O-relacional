@@ -9,8 +9,8 @@ db.menu.insertMany([
 // |- Atualizar os preços -|
 
 db.menu.updateMany( 
-    { dish: true},
-    {$mul: { preco: 1.1} 
+    {},
+    {$mul: { price: 1.1} 
 });
 
 // |--- Exercicio ---|
@@ -26,7 +26,7 @@ db.menu.updateOne(
 // |- Atualizar o preço do Sushi -|
 db.menu.updateOne(
     {dish: "Sushi"},
-    {$set: {preco: 35}}
+    {$set: {price: 35}}
 );
 
 // |--- Exercicio ---|
@@ -34,6 +34,11 @@ db.menu.updateOne(
 // |- Substitui ingrediente do taco -|
 db.menu.updateOne(
     {dish: "Taco"},
-    {$pull: {ingredientes: "Beef"}},
-    {$push: {ingredientes: "Chicken"}}
+    {$pull: {ingredientes: "Beef"}}
+);
+
+db.menu.updateOne(
+    {dish: "Taco"},
+    //{$push: {ingredientes: "Chicken"}}
+    {$addToSet: {ingredientes: "Chicken"}}
 );
